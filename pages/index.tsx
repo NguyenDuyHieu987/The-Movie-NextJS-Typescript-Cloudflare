@@ -41,34 +41,34 @@ const App: NextPage = ({
   );
 };
 
-export async function getStaticProps() {
-  const trending = await getTrending(1).then((res) => {
-    return res.data.results.slice(0, 10);
-  });
-  const nowplaying = await getNowPlaying(1).then((res) => {
-    return res.data.results;
-  });
-  const upcoming = await getUpComing(1).then((res) => {
-    return res.data.results.slice(0, 12);
-  });
+// export async function getServerSideProps() {
+//   const trending = await getTrending(1).then((res) => {
+//     return res.data.results.slice(0, 10);
+//   });
+//   const nowplaying = await getNowPlaying(1).then((res) => {
+//     return res.data.results;
+//   });
+//   const upcoming = await getUpComing(1).then((res) => {
+//     return res.data.results.slice(0, 12);
+//   });
 
-  const popular = await getPopular(1).then((res) => {
-    return res.data.results.slice(0, 13);
-  });
+//   const popular = await getPopular(1).then((res) => {
+//     return res.data.results.slice(0, 13);
+//   });
 
-  const toparated = await getTopRated(1).then((res) => {
-    return res.data.results.slice(0, 12);
-  });
+//   const toparated = await getTopRated(1).then((res) => {
+//     return res.data.results.slice(0, 12);
+//   });
 
-  return {
-    props: {
-      trending,
-      nowplaying,
-      upcoming,
-      popular,
-      toparated,
-    },
-  };
-}
+//   return {
+//     props: {
+//       trending,
+//       nowplaying,
+//       upcoming,
+//       popular,
+//       toparated,
+//     },
+//   };
+// }
 
 export default App;

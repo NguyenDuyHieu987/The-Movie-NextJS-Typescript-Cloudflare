@@ -584,87 +584,87 @@ const PrevPlayMovie: NextPage = ({
   );
 };
 
-export async function getStaticProps(context: any) {
-  // var data = {};
-  var creditsData = {};
-  var similarData = [];
-  var recommendData = [];
-  var isTV = false;
-  const { params, query } = context;
-  const { ...slug } = params;
+// export async function getServerSideProps(context: any) {
+//   // var data = {};
+//   var creditsData = {};
+//   var similarData = [];
+//   var recommendData = [];
+//   var isTV = false;
+//   const { params, query } = context;
+//   const { ...slug } = params;
 
-  var data = await getMovieSeriesById(slug.slug[0])
-    .then((tvResponed) => {
-      isTV = true;
-      return tvResponed?.data;
-    })
-    .catch((e) => {
-      if (axios.isCancel(e)) return;
-    });
+//   var data = await getMovieSeriesById(slug.slug[0])
+//     .then((tvResponed) => {
+//       isTV = true;
+//       return tvResponed?.data;
+//     })
+//     .catch((e) => {
+//       if (axios.isCancel(e)) return;
+//     });
 
-  if (data === null) {
-    data = await getMovieById(slug.slug[0])
-      .then((movieResponed) => {
-        isTV = false;
-        return movieResponed?.data;
-      })
-      .catch((e) => {
-        if (axios.isCancel(e)) return;
-      });
-  }
+//   if (data === null) {
+//     data = await getMovieById(slug.slug[0])
+//       .then((movieResponed) => {
+//         isTV = false;
+//         return movieResponed?.data;
+//       })
+//       .catch((e) => {
+//         if (axios.isCancel(e)) return;
+//       });
+//   }
 
-  recommendData = await getTrending(1)
-    .then((movieResponed) => {
-      return movieResponed?.data.results;
-    })
-    .catch((e) => {
-      if (axios.isCancel(e)) return;
-    });
+//   recommendData = await getTrending(1)
+//     .then((movieResponed) => {
+//       return movieResponed?.data.results;
+//     })
+//     .catch((e) => {
+//       if (axios.isCancel(e)) return;
+//     });
 
-  if (isTV) {
-    creditsData = await getMovieByCredit('tv', slug.slug[0])
-      .then((movieResponed) => {
-        return movieResponed?.data;
-      })
-      .catch((e) => {
-        if (axios.isCancel(e)) return;
-      });
+//   if (isTV) {
+//     creditsData = await getMovieByCredit('tv', slug.slug[0])
+//       .then((movieResponed) => {
+//         return movieResponed?.data;
+//       })
+//       .catch((e) => {
+//         if (axios.isCancel(e)) return;
+//       });
 
-    similarData = await getMovieBySimilar('tv', data?.genres[0], 1)
-      .then((movieResponed) => {
-        return movieResponed?.data.results;
-      })
-      .catch((e) => {
-        if (axios.isCancel(e)) return;
-      });
-  } else {
-    creditsData = await getMovieByCredit('movie', slug.slug[0])
-      .then((movieResponed) => {
-        return movieResponed?.data;
-      })
-      .catch((e) => {
-        if (axios.isCancel(e)) return;
-      });
+//     similarData = await getMovieBySimilar('tv', data?.genres[0], 1)
+//       .then((movieResponed) => {
+//         return movieResponed?.data.results;
+//       })
+//       .catch((e) => {
+//         if (axios.isCancel(e)) return;
+//       });
+//   } else {
+//     creditsData = await getMovieByCredit('movie', slug.slug[0])
+//       .then((movieResponed) => {
+//         return movieResponed?.data;
+//       })
+//       .catch((e) => {
+//         if (axios.isCancel(e)) return;
+//       });
 
-    similarData = await getMovieBySimilar('movie', data?.genres[0], 1)
-      .then((movieResponed) => {
-        return movieResponed?.data.results;
-      })
-      .catch((e) => {
-        if (axios.isCancel(e)) return;
-      });
-  }
+//     similarData = await getMovieBySimilar('movie', data?.genres[0], 1)
+//       .then((movieResponed) => {
+//         return movieResponed?.data.results;
+//       })
+//       .catch((e) => {
+//         if (axios.isCancel(e)) return;
+//       });
+//   }
 
-  return {
-    props: {
-      params: slug,
-      results: data,
-      creditsData: creditsData,
-      similarData: similarData,
-      recommendData: recommendData,
-      isTV: isTV,
-    },
-  };
-}
+//   return {
+//     props: {
+//       params: slug,
+//       results: data,
+//       creditsData: creditsData,
+//       similarData: similarData,
+//       recommendData: recommendData,
+//       isTV: isTV,
+//     },
+//   };
+// }
 
 export default PrevPlayMovie;

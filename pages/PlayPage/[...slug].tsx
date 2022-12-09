@@ -539,84 +539,84 @@ const PlayPage: NextPage = ({
   );
 };
 
-export async function getStaticProps(context: any) {
-  // var data = {};
-  var similarData = [];
-  var recommendData = [];
-  var seasonData = {};
-  var isTV = false;
-  const { params, query } = context;
-  const { ...slug } = params;
+// export async function getServerSideProps(context: any) {
+//   // var data = {};
+//   var similarData = [];
+//   var recommendData = [];
+//   var seasonData = {};
+//   var isTV = false;
+//   const { params, query } = context;
+//   const { ...slug } = params;
 
-  var data = await getMovieSeriesById(slug.slug[0])
-    .then((tvResponed) => {
-      isTV = true;
-      return tvResponed?.data;
-    })
-    .catch((e) => {
-      if (axios.isCancel(e)) return;
-    });
+//   var data = await getMovieSeriesById(slug.slug[0])
+//     .then((tvResponed) => {
+//       isTV = true;
+//       return tvResponed?.data;
+//     })
+//     .catch((e) => {
+//       if (axios.isCancel(e)) return;
+//     });
 
-  if (data === null) {
-    data = await getMovieById(slug.slug[0])
-      .then((movieResponed) => {
-        isTV = false;
-        return movieResponed?.data;
-      })
-      .catch((e) => {
-        if (axios.isCancel(e)) return;
-      });
-  }
+//   if (data === null) {
+//     data = await getMovieById(slug.slug[0])
+//       .then((movieResponed) => {
+//         isTV = false;
+//         return movieResponed?.data;
+//       })
+//       .catch((e) => {
+//         if (axios.isCancel(e)) return;
+//       });
+//   }
 
-  recommendData = await getTrending(1)
-    .then((movieResponed) => {
-      return movieResponed?.data.results;
-    })
-    .catch((e) => {
-      if (axios.isCancel(e)) return;
-    });
+//   recommendData = await getTrending(1)
+//     .then((movieResponed) => {
+//       return movieResponed?.data.results;
+//     })
+//     .catch((e) => {
+//       if (axios.isCancel(e)) return;
+//     });
 
-  if (isTV) {
-    similarData = await getMovieBySimilar('tv', data?.genres[0], 1)
-      .then((movieResponed) => {
-        return movieResponed?.data.results;
-      })
-      .catch((e) => {
-        if (axios.isCancel(e)) return;
-      });
-  } else {
-    similarData = await getMovieBySimilar('movie', data?.genres[0], 1)
-      .then((movieResponed) => {
-        return movieResponed?.data.results;
-      })
-      .catch((e) => {
-        if (axios.isCancel(e)) return;
-      });
-  }
+//   if (isTV) {
+//     similarData = await getMovieBySimilar('tv', data?.genres[0], 1)
+//       .then((movieResponed) => {
+//         return movieResponed?.data.results;
+//       })
+//       .catch((e) => {
+//         if (axios.isCancel(e)) return;
+//       });
+//   } else {
+//     similarData = await getMovieBySimilar('movie', data?.genres[0], 1)
+//       .then((movieResponed) => {
+//         return movieResponed?.data.results;
+//       })
+//       .catch((e) => {
+//         if (axios.isCancel(e)) return;
+//       });
+//   }
 
-  if (isTV) {
-    seasonData = await getMoviesBySeason(
-      +slug.slug[0],
-      data?.last_episode_to_air?.season_number
-    )
-      .then((episodesRespones) => {
-        return episodesRespones?.data;
-      })
-      .catch((e) => {
-        if (axios.isCancel(e)) return;
-      });
-  }
+//   if (isTV) {
+//     seasonData = await getMoviesBySeason(
+//       +slug.slug[0],
+//       data?.last_episode_to_air?.season_number
+//     )
+//       .then((episodesRespones) => {
+//         return episodesRespones?.data;
+//       })
+//       .catch((e) => {
+//         if (axios.isCancel(e)) return;
+//       });
+//   }
 
-  return {
-    props: {
-      params: slug,
-      results: data,
-      similarData: similarData,
-      recommendData: recommendData,
-      isTV: isTV,
-      seasonData: seasonData,
-    },
-  };
-}
+//   return {
+//     props: {
+//       params: slug,
+//       results: data,
+//       similarData: similarData,
+//       recommendData: recommendData,
+//       isTV: isTV,
+//       seasonData: seasonData,
+//     },
+//   };
+// }
 
 export default memo(PlayPage);
