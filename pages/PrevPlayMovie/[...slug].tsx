@@ -78,17 +78,19 @@ const PrevPlayMovie: NextPage = ({
     getData();
     setVoteAverage(data?.vote_average);
     setURL(window.location.href);
-  }, [movieid]);
+  }, [slug]);
 
   // console.log('slug: ', props.params);
   // console.log('results: ', props.results);
 
+  console.log(slug);
+
   const getData = () => {
-    getMovieSeriesById(movieid)
+    getMovieSeriesById(slug[0])
       .then((tvResponed) => {
         // setEpisodes(movieResponed?.data);
         if (tvResponed?.data === null)
-          getMovieById(movieid)
+          getMovieById(slug[0])
             .then((movieResponed) => {
               setIsEpisodes(false);
               setData(movieResponed?.data);
@@ -162,7 +164,7 @@ const PrevPlayMovie: NextPage = ({
 
   useEffect(() => {
     dataList.map((item: any) => {
-      if (item?.id === Number(movieid)) {
+      if (item?.id === Number(slug[0])) {
         setIsClickBtnBookMark(true);
       }
     });
@@ -213,7 +215,7 @@ const PrevPlayMovie: NextPage = ({
 
       addItemList(user?.id, {
         media_type: isEpisodes ? 'tv' : 'movie',
-        media_id: movieid && +movieid,
+        media_id: slug[0] && +slug[0],
       });
       setIsClickBtnBookMark(true);
     } else {
@@ -224,7 +226,7 @@ const PrevPlayMovie: NextPage = ({
       //   }
       // );
       removeItemList(user?.id, {
-        media_id: movieid && +movieid,
+        media_id: slug[0] && +slug[0],
       });
       setIsClickBtnBookMark(false);
     }
@@ -461,7 +463,7 @@ const PrevPlayMovie: NextPage = ({
                 </div>
                 <Interaction
                   isEpisodes={isEpisodes}
-                  movieid={movieid}
+                  movieid={slug[0]}
                   voteAverage={data?.vote_average}
                   voteCount={data?.vote_count}
                   currentURL={URL}
