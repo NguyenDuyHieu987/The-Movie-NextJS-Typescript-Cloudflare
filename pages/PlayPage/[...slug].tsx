@@ -85,17 +85,17 @@ const PlayPage: NextPage = ({
     window.scrollTo(0, 0);
     setURL(window.location.href);
     setActiveSeason(data?.last_episode_to_air?.season_number);
-  }, [slug]);
+  }, [movieid]);
 
   // console.log('slug: ', props.params);
   // console.log('results: ', seasonData);
 
   const getData = () => {
-    getMovieSeriesById(slug[0])
+    getMovieSeriesById(movieid)
       .then((tvResponed) => {
         // setEpisodes(movieResponed?.data);
         if (tvResponed?.data === null)
-          getMovieById(slug[0])
+          getMovieById(movieid)
             .then((movieResponed) => {
               setIsEpisodes(false);
               setData(movieResponed?.data);
@@ -124,14 +124,14 @@ const PlayPage: NextPage = ({
 
   useEffect(() => {
     dataList.map((item: any) => {
-      if (item?.id === Number(slug[0])) {
+      if (item?.id === Number(movieid)) {
         setIsFollow(true);
       }
     });
   }, [dataList || data]);
 
   useEffect(() => {
-    getMoviesBySeason(+slug[0], activeSeason)
+    getMoviesBySeason(+movieid, activeSeason)
       .then((episodesRespones) => {
         setDataSeason(episodesRespones?.data);
       })
@@ -156,7 +156,7 @@ const PlayPage: NextPage = ({
     //   .catch((e) => {
     //     if (axios.isCancel(e)) return;
     //   });
-  }, [isEpisodes || slug]);
+  }, [isEpisodes || movieid]);
 
   // useEffect(() => {
   //   if (data?.genres !== undefined) {
@@ -339,7 +339,7 @@ const PlayPage: NextPage = ({
 
       addItemList(user?.id, {
         media_type: isEpisodes ? 'tv' : 'movie',
-        media_id: +slug[0],
+        media_id: +movieid,
       });
       setIsFollow(true);
     } else {
@@ -350,7 +350,7 @@ const PlayPage: NextPage = ({
       //   }
       // );
       removeItemList(user?.id, {
-        media_id: +slug[0],
+        media_id: +movieid,
       });
       setIsFollow(false);
     }
