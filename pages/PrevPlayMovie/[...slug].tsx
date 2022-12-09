@@ -584,7 +584,7 @@ const PrevPlayMovie: NextPage = ({
   );
 };
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
   // var data = {};
   var creditsData = {};
   var similarData = [];
