@@ -41,7 +41,7 @@ const App: NextPage = ({
   );
 };
 
-export async function getStaticProps() {
+export async function getStaticProps () {
   const trending = await getTrending(1).then((res) => {
     return res.data.results.slice(0, 10);
   });

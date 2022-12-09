@@ -5,12 +5,17 @@ import { FilterContext } from './FilterContext';
 
 function FilterProvider({ children }) {
   const [dataFilter, setDataFilter] = useState([]);
+  const [isLoadingContext, setIsLoadingContext] = useState(false);
   const [isClickFilter, setIsClickFilter] = useState(false);
   const [pageFilter, setPageFilter] = useState(1);
   const [user, setUser] = useState<any>({});
 
   const handleOnclickFilter = useCallback(() => {
+    setIsLoadingContext(true);
     getDataFiter();
+    setTimeout(() => {
+      setIsLoadingContext(false);
+    }, 1000);
     setIsClickFilter(true);
   }, []);
 
@@ -63,6 +68,8 @@ function FilterProvider({ children }) {
         getDataFiter,
         user,
         setUser,
+        isLoadingContext,
+        setIsLoadingContext,
       }}
     >
       {children}

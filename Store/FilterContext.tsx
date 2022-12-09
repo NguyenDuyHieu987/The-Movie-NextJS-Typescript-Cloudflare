@@ -11,4 +11,6 @@ export const FilterContext = createContext({
   setPageFilter: undefined,
   getDataFiter: undefined,
   setUser: undefined,
+  isLoadingContext: undefined,
+  setIsLoadingContext: undefined,
 });

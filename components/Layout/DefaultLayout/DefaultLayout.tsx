@@ -8,7 +8,7 @@ import Head from 'next/head';
 
 function DefaultLayout({ children }: any) {
   return (
-    <div>
+    <>
       <Header />
       <Navbar />
       <main className="main-content">
@@ -24,7 +24,7 @@ function DefaultLayout({ children }: any) {
         </div>
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
 export default DefaultLayout;

@@ -40,6 +40,7 @@ function FilterMovie() {
       setYears(yearResponse.data);
     });
   }, []);
+
   // sort.value || type.value || country.value || year.value
 
   return (

@@ -30,6 +30,7 @@ import ControlPage from './ControlPage';
 import { FilterContext } from '../../Store/FilterContext';
 import { useRouter, withRouter } from 'next/router';
 import Head from 'next/head';
+import { ThreeDots } from 'react-loader-spinner';
 import type { NextPage } from 'next';
 
 const cx = classNames.bind(styles);
@@ -55,7 +56,8 @@ const DefaultPage: NextPage = ({ params, results }: any) => {
     pageFilter,
     setPageFilter,
     getDataFiter,
-    setIsClickFilter,
+    isLoadingContext,
+    setIsLoadingContext,
   } = useContext(FilterContext);
 
   const getData = async () => {
@@ -201,7 +203,11 @@ const DefaultPage: NextPage = ({ params, results }: any) => {
   }, [page1]);
 
   useEffect(() => {
+    setIsLoadingContext(true);
     getData();
+    setTimeout(() => {
+      setIsLoadingContext(false);
+    }, 1000);
   }, [slug]);
 
   // useEffect(() => {
@@ -218,11 +224,26 @@ const DefaultPage: NextPage = ({ params, results }: any) => {
           <h3 className={cx('main-movies-title')} style={{ fontSize: '25px' }}>
             <strong>{title}</strong>
           </h3>
-          <div className={cx('main-movies-container')}>
-            {data?.map((item, index) => (
-              <DefaultPageMovieCard item={item} key={index.toString()} />
-            ))}
-          </div>
+
+          {isLoadingContext ? (
+            <div className={cx('loading-container')}>
+              <ThreeDots
+                height="80"
+                width="80"
+                radius="9"
+                color="red"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                visible={isLoadingContext}
+              />
+            </div>
+          ) : (
+            <div className={cx('main-movies-container')}>
+              {data?.map((item, index) => (
+                <DefaultPageMovieCard item={item} key={index.toString()} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -238,7 +259,7 @@ const DefaultPage: NextPage = ({ params, results }: any) => {
   );
 };
 
-export async function getStaticProps(context: any) {
+export async function getStaticProps (context: any) {
   var data = [];
   const { params, query } = context;
   const { ...slug } = params;
