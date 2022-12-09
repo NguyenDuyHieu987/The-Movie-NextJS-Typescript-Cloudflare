@@ -35,7 +35,7 @@
     "nextjs-progressbar": "^0.0.16",
     "normalize.css": "^8.0.1",
     "owl.carousel": "^2.3.4",
-    "react": "18.2.0",
+    "react": "18.0.0",
     "react-content-loader": "^6.2.0",
     "react-dom": "18.2.0",
     "react-facebook-login": "^4.1.1",
