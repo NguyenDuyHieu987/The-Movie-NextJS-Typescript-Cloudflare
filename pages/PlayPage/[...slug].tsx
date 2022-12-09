@@ -539,7 +539,7 @@ const PlayPage: NextPage = ({
   );
 };
 
-export async function getStaticProps (context: any) {
+export async function getServerSideProps(context: any) {
   // var data = {};
   var similarData = [];
   var recommendData = [];
