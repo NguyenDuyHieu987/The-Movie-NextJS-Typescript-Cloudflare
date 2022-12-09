@@ -42,7 +42,7 @@ const Home = ({ trending, nowplaying, upcoming, popular, toparated }) => {
   const [isClearInterval, setIsClearInterval] = useState(false);
 
   useEffect(() => {
-    // GetData();
+    GetData();
   }, []);
 
   let i = useRef(0).current;
