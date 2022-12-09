@@ -27,7 +27,7 @@ import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
-const Home = ({ trending, nowplaying, upcoming, popular, toparated }) => {
+const Home = ({ da, nowplaying, upcoming, popular, toparated }) => {
   const [dataBanner, setDataBanner] = useState([]);
   const [dataSlide, setDataSlide] = useState([]);
   const [pageNowPlaying, setPageNowPlaying] = useState(1);
@@ -212,7 +212,7 @@ const Home = ({ trending, nowplaying, upcoming, popular, toparated }) => {
           <section className={cx('banner-slide')}>
             <div className={cx('banner-slide-container')}>
               <div>
-                {trending?.map((item, index) => (
+                {dataBanner?.map((item, index) => (
                   <BannerSlideItem item={item} key={index.toString()} />
                 ))}
               </div>
@@ -239,16 +239,16 @@ const Home = ({ trending, nowplaying, upcoming, popular, toparated }) => {
             </div>
           </section>
 
-          <SlideShow dataSlide={nowplaying} title="PHIM NỔI BẬT" />
+          <SlideShow dataSlide={dataSlide} title="PHIM NỔI BẬT" />
 
           <MovieContainer
-            data={upcoming}
+            data={dataUpComing}
             title="PHIM MỚI CẬP NHẬT"
             type="box-movie"
           />
 
           <TrailerContainer
-            data={popular}
+            data={dataPopular}
             title="TRAILER"
             setIsOpenModelTrailer={setIsOpenModelTrailer}
             setDataModelTrailer={setDataModelTrailer}
@@ -271,7 +271,7 @@ const Home = ({ trending, nowplaying, upcoming, popular, toparated }) => {
           </section> */}
 
           <MovieContainer
-            data={toparated}
+            data={dataTopRated}
             title="PHIM CHIẾU RẠP MỚI"
             type="box-movie"
           />
