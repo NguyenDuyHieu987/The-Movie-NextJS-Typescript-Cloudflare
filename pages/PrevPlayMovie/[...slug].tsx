@@ -80,13 +80,13 @@ const PrevPlayMovie: NextPage = ({
     setURL(window.location.href);
   }, [slug]);
 
+  // console.log('slug: ', props.params);
   // console.log('results: ', props.results);
 
   const getData = () => {
     getMovieSeriesById(slug[0])
       .then((tvResponed) => {
         // setEpisodes(movieResponed?.data);
-
         if (tvResponed?.data === null)
           getMovieById(slug[0])
             .then((movieResponed) => {
@@ -584,14 +584,7 @@ const PrevPlayMovie: NextPage = ({
   );
 };
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps(context: any) {
+export async function getServerSideProps(context: any) {
   // var data = {};
   var creditsData = {};
   var similarData = [];

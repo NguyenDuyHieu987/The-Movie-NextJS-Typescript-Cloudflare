@@ -196,7 +196,7 @@ const Follow: NextPage = ({ dataTheMostView }: any) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const dataTheMostView = await getTheMostVoteCount(1)
     .then((movieResponse) => {
       return movieResponse?.data?.results;

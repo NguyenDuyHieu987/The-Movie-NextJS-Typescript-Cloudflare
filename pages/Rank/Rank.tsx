@@ -87,7 +87,7 @@ const Rank: NextPage = ({ dataTheMostView, dataNowPlaying }: any) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const dataTheMostView = await getTheMostVoteCount(1)
     .then((movieResponse) => {
       return movieResponse?.data?.results;
@@ -95,7 +95,7 @@ export async function getStaticProps() {
     .catch((e) => {
       if (axios.isCancel(e)) return;
     });
-  // console.log(dataTheMostView);
+  console.log(dataTheMostView);
   const dataNowPlaying = await getNowPlaying(1).then((movieRespose) => {
     return movieRespose.data.results;
   });

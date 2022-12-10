@@ -10,6 +10,9 @@ const nextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
+  experimental: {
+    runtime: 'experimental-edge',
+  },
 };
 
 module.exports = nextConfig;

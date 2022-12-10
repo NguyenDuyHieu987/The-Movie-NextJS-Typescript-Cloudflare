@@ -259,14 +259,7 @@ const DefaultPage: NextPage = ({ params, results }: any) => {
   );
 };
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps(context: any) {
+export async function getServerSideProps(context: any) {
   var data = [];
   const { params, query } = context;
   const { ...slug } = params;
