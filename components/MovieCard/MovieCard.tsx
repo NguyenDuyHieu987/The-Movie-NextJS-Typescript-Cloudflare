@@ -102,8 +102,8 @@ function MovieCard({ item, type }: any) {
           <div className={cx('img-container')}>
             {!loading && (
               <ContentLoader
-                width={'100%'}
-                height={'280'}
+                width={'233px'}
+                height={'100%'}
                 backgroundColor={'#161616'}
                 foregroundColor={'#222222'}
                 speed={2}
