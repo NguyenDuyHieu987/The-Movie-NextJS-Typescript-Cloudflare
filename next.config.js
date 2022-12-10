@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    runtime: 'experimental-edge',
+  },
   reactStrictMode: true,
   swcMinify: true,
   images: {
@@ -9,9 +12,6 @@ const nextConfig = {
       'the-movie-node-image.onrender.com',
     ],
     formats: ['image/avif', 'image/webp'],
-  },
-  experimental: {
-    runtime: 'experimental-edge',
   },
 };
 
