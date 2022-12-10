@@ -196,20 +196,20 @@ const Follow: NextPage = ({ dataTheMostView }: any) => {
   );
 };
 
-// export async function getServerSideProps() {
-//   const dataTheMostView = await getTheMostVoteCount(1)
-//     .then((movieResponse) => {
-//       return movieResponse?.data?.results;
-//     })
-//     .catch((e) => {
-//       if (axios.isCancel(e)) return;
-//     });
+export async function getStaticProps() {
+  const dataTheMostView = await getTheMostVoteCount(1)
+    .then((movieResponse) => {
+      return movieResponse?.data?.results;
+    })
+    .catch((e) => {
+      if (axios.isCancel(e)) return;
+    });
 
-//   return {
-//     props: {
-//       dataTheMostView: dataTheMostView,
-//     },
-//   };
-// }
+  return {
+    props: {
+      dataTheMostView: dataTheMostView,
+    },
+  };
+}
 
 export default Follow;

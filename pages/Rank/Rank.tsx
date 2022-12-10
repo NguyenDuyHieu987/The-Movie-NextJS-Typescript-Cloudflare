@@ -87,25 +87,25 @@ const Rank: NextPage = ({ dataTheMostView, dataNowPlaying }: any) => {
   );
 };
 
-// export async function getServerSideProps() {
-//   const dataTheMostView = await getTheMostVoteCount(1)
-//     .then((movieResponse) => {
-//       return movieResponse?.data?.results;
-//     })
-//     .catch((e) => {
-//       if (axios.isCancel(e)) return;
-//     });
-//   console.log(dataTheMostView);
-//   const dataNowPlaying = await getNowPlaying(1).then((movieRespose) => {
-//     return movieRespose.data.results;
-//   });
+export async function getStaticProps() {
+  const dataTheMostView = await getTheMostVoteCount(1)
+    .then((movieResponse) => {
+      return movieResponse?.data?.results;
+    })
+    .catch((e) => {
+      if (axios.isCancel(e)) return;
+    });
+  // console.log(dataTheMostView);
+  const dataNowPlaying = await getNowPlaying(1).then((movieRespose) => {
+    return movieRespose.data.results;
+  });
 
-//   return {
-//     props: {
-//       dataTheMostView: dataTheMostView || [],
-//       dataNowPlaying: dataNowPlaying || [],
-//     },
-//   };
-// }
+  return {
+    props: {
+      dataTheMostView: dataTheMostView || [],
+      dataNowPlaying: dataNowPlaying || [],
+    },
+  };
+}
 
 export default Rank;

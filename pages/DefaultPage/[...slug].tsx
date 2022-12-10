@@ -259,100 +259,107 @@ const DefaultPage: NextPage = ({ params, results }: any) => {
   );
 };
 
-// export async function getServerSideProps(context: any) {
-//   var data = [];
-//   const { params, query } = context;
-//   const { ...slug } = params;
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  };
+}
 
-//   if (slug.slug[0] == 'Genres') {
-//     data = await getMoviesByGenres(slug.slug[1], 1)
-//       .then((movieResponse) => {
-//         return movieResponse.data.results;
-//       })
-//       .catch((e) => {
-//         if (axios.isCancel(e)) return;
-//       });
-//   }
+export async function getStaticProps(context: any) {
+  var data = [];
+  const { params, query } = context;
+  const { ...slug } = params;
 
-//   if (slug.slug[0] == 'Years') {
-//     if (slug.slug[1] !== 'truoc-nam-2000') {
-//       data = await getMoviesByYear(slug.slug[1], 1)
-//         .then((movieResponse) => {
-//           return movieResponse.data.results;
-//         })
-//         .catch((e) => {
-//           if (axios.isCancel(e)) return;
-//         });
-//     } else {
-//       data = await getMoviesByYearBeFore2000('2000', 1)
-//         .then((movieResponse) => {
-//           return movieResponse.data.results;
-//         })
-//         .catch((e) => {
-//           if (axios.isCancel(e)) return;
-//         });
-//     }
-//   }
+  if (slug.slug[0] == 'Genres') {
+    data = await getMoviesByGenres(slug.slug[1], 1)
+      .then((movieResponse) => {
+        return movieResponse.data.results;
+      })
+      .catch((e) => {
+        if (axios.isCancel(e)) return;
+      });
+  }
 
-//   if (slug.slug[0] == 'Country') {
-//     data = await getMovieByCountry(slug.slug[1], 1)
-//       .then((movieResponse) => {
-//         return movieResponse.data.results;
-//       })
-//       .catch((e) => {
-//         if (axios.isCancel(e)) return;
-//       });
-//   }
+  if (slug.slug[0] == 'Years') {
+    if (slug.slug[1] !== 'truoc-nam-2000') {
+      data = await getMoviesByYear(slug.slug[1], 1)
+        .then((movieResponse) => {
+          return movieResponse.data.results;
+        })
+        .catch((e) => {
+          if (axios.isCancel(e)) return;
+        });
+    } else {
+      data = await getMoviesByYearBeFore2000('2000', 1)
+        .then((movieResponse) => {
+          return movieResponse.data.results;
+        })
+        .catch((e) => {
+          if (axios.isCancel(e)) return;
+        });
+    }
+  }
 
-//   if (slug.slug[0] == 'List') {
-//     switch (slug.slug[1]) {
-//       case 'phim-moi-cap-nhat':
-//         data = await getUpComing(1)
-//           .then((movieResponse) => {
-//             return movieResponse.data.results;
-//           })
-//           .catch((e) => {
-//             if (axios.isCancel(e)) return;
-//           });
-//         break;
-//       case 'phim-chieu-rap-moi':
-//         data = await getTopRated(1)
-//           .then((movieResponse) => {
-//             return movieResponse.data.results;
-//           })
-//           .catch((e) => {
-//             if (axios.isCancel(e)) return;
-//           });
-//         break;
-//       case 'phim-le':
-//         data = await getMovies(1)
-//           .then((movieResponse) => {
-//             return movieResponse.data.results;
-//           })
-//           .catch((e) => {
-//             if (axios.isCancel(e)) return;
-//           });
-//         break;
-//       case 'phim-bo':
-//         data = await getMovieSeries(1)
-//           .then((movieResponse) => {
-//             return movieResponse.data.results;
-//           })
-//           .catch((e) => {
-//             if (axios.isCancel(e)) return;
-//           });
-//         break;
-//       default:
-//         break;
-//     }
-//   }
+  if (slug.slug[0] == 'Country') {
+    data = await getMovieByCountry(slug.slug[1], 1)
+      .then((movieResponse) => {
+        return movieResponse.data.results;
+      })
+      .catch((e) => {
+        if (axios.isCancel(e)) return;
+      });
+  }
 
-//   return {
-//     props: {
-//       params: slug,
-//       results: data || null,
-//     },
-//   };
-// }
+  if (slug.slug[0] == 'List') {
+    switch (slug.slug[1]) {
+      case 'phim-moi-cap-nhat':
+        data = await getUpComing(1)
+          .then((movieResponse) => {
+            return movieResponse.data.results;
+          })
+          .catch((e) => {
+            if (axios.isCancel(e)) return;
+          });
+        break;
+      case 'phim-chieu-rap-moi':
+        data = await getTopRated(1)
+          .then((movieResponse) => {
+            return movieResponse.data.results;
+          })
+          .catch((e) => {
+            if (axios.isCancel(e)) return;
+          });
+        break;
+      case 'phim-le':
+        data = await getMovies(1)
+          .then((movieResponse) => {
+            return movieResponse.data.results;
+          })
+          .catch((e) => {
+            if (axios.isCancel(e)) return;
+          });
+        break;
+      case 'phim-bo':
+        data = await getMovieSeries(1)
+          .then((movieResponse) => {
+            return movieResponse.data.results;
+          })
+          .catch((e) => {
+            if (axios.isCancel(e)) return;
+          });
+        break;
+      default:
+        break;
+    }
+  }
+
+  return {
+    props: {
+      params: slug,
+      results: data || null,
+    },
+  };
+}
 
 export default DefaultPage;
