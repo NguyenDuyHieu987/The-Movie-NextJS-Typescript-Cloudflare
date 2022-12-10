@@ -588,7 +588,7 @@ const PrevPlayMovie: NextPage = ({
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: 'blocking',
+    fallback: true,
   };
 }
 
