@@ -102,7 +102,7 @@ function MovieCard({ item, type }: any) {
           <div className={cx('img-container')}>
             {!loading && (
               <ContentLoader
-                width={'233px'}
+                width={233}
                 height={'100%'}
                 backgroundColor={'#161616'}
                 foregroundColor={'#222222'}
@@ -167,8 +167,8 @@ function MovieCard({ item, type }: any) {
                 //   flexDirection: 'column',
                 // }}
               >
-                <rect x="0" y="3" width="65%" height="26.58" />
-                <rect x="0" y="35" width="100%" height="22.71" />
+                <rect x="0" y="3" width="65%" height={26.58} />
+                <rect x="0" y="35" width="100%" height={22.71} />
               </ContentLoader>
             )}
 
