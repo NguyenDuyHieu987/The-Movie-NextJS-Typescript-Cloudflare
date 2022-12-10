@@ -80,7 +80,6 @@ const PrevPlayMovie: NextPage = ({
     setURL(window.location.href);
   }, [slug]);
 
-  // console.log('slug: ', props.params);
   // console.log('results: ', props.results);
 
   const getData = () => {

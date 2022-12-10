@@ -271,7 +271,6 @@ export async function getStaticProps(context: any) {
   const { params, query } = context;
   const { ...slug } = params;
 
-
   if (slug.slug[0] == 'Genres') {
     data = await getMoviesByGenres(slug.slug[1], 1)
       .then((movieResponse) => {
